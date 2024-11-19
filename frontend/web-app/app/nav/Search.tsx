@@ -25,6 +25,7 @@ export default function Search() {
         }}
         value={searchValue}
         onChange={onChange}
+        id='mainSearchBar'
         type='text'
         placeholder='Search for cars by make, model or color'
         className='

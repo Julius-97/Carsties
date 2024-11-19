@@ -1,9 +1,13 @@
 import React from 'react';
-import { AiOutlineCar } from 'react-icons/ai';
 import Search from './Search';
 import Logo from './Logo';
+import LoginButton from './LoginButton';
+import { getCurrentUser } from '../actions/authActions';
+import UserAction from './UserAction';
 
-export default function Navbar() {
+export default async function Navbar() {
+  const user = await getCurrentUser();
+
   return (
     <header
       className='
@@ -11,7 +15,7 @@ export default function Navbar() {
     >
       <Logo />
       <Search />
-      <div>Login</div>
+      {user ? <UserAction user={user} /> : <LoginButton />}
     </header>
   );
 }
