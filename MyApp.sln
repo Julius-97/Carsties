@@ -15,13 +15,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "src\Iden
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayService", "src\GatewayService\GatewayService.csproj", "{03B58F6D-DC10-40F6-AC90-1EDD3A97D4C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiddingService", "src\BiddingService\BiddingService.csproj", "{267A6552-508F-486D-B65E-CF2D513C2AF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0D8D363E-B42C-4F55-B9D9-A629EE01B29B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D4A8DFEE-9B51-4C4A-BD58-0563A2A6B789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,6 +45,13 @@ Global
 		{03B58F6D-DC10-40F6-AC90-1EDD3A97D4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03B58F6D-DC10-40F6-AC90-1EDD3A97D4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03B58F6D-DC10-40F6-AC90-1EDD3A97D4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267A6552-508F-486D-B65E-CF2D513C2AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267A6552-508F-486D-B65E-CF2D513C2AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267A6552-508F-486D-B65E-CF2D513C2AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267A6552-508F-486D-B65E-CF2D513C2AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D4A8DFEE-9B51-4C4A-BD58-0563A2A6B789} = {7B5B06A1-5E75-4AA9-8549-8BAE57DBC452}
@@ -51,5 +59,6 @@ Global
 		{594B04FA-A717-43EB-9B81-AF102AC9CF8B} = {7B5B06A1-5E75-4AA9-8549-8BAE57DBC452}
 		{06C1DDB9-689E-45A8-A267-83D77AE70C82} = {7B5B06A1-5E75-4AA9-8549-8BAE57DBC452}
 		{03B58F6D-DC10-40F6-AC90-1EDD3A97D4C0} = {7B5B06A1-5E75-4AA9-8549-8BAE57DBC452}
+		{267A6552-508F-486D-B65E-CF2D513C2AF3} = {7B5B06A1-5E75-4AA9-8549-8BAE57DBC452}
 	EndGlobalSection
 EndGlobal
