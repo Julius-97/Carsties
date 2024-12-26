@@ -3,16 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import AuctionCard from './AuctionCard';
 import AppPagination from '../components/AppPagination';
-import { Auction, PagedResult } from '@/types';
 import { getData } from '../actions/auctionActions';
 import Filters from './Filters';
 import { useParamsStore } from '@/hooks/useParamsStore';
 import { useShallow } from 'zustand/shallow';
 import queryString from 'query-string';
 import EmptyFilter from '../components/EmptyFilter';
+import { useAuctionStore } from '@/hooks/useAuctionStore';
 
 export default function Listings() {
-  const [data, setData] = useState<PagedResult<Auction>>();
+  const [setLoading] = useState(true);
   const params = useParamsStore(
     useShallow((state) => ({
       pageNumber: state.pageNumber,
@@ -24,6 +24,15 @@ export default function Listings() {
       winner: state.winner,
     }))
   );
+  const data = useAuctionStore(
+    useShallow((state) => ({
+      auctions: state.auctions,
+      totalCount: state.totalCount,
+      pageCount: state.pageCount,
+    }))
+  );
+  const setData = useAuctionStore((state) => state.setData);
+
   const setParams = useParamsStore((state) => state.setParams);
   const url = queryString.stringifyUrl({ url: '', query: params });
 
@@ -34,8 +43,9 @@ export default function Listings() {
   useEffect(() => {
     getData(url).then((data) => {
       setData(data);
+      setLoading(false);
     });
-  }, [url]);
+  }, [setData, url]);
 
   if (!data) return <h3>Loading...</h3>;
 
@@ -47,7 +57,7 @@ export default function Listings() {
       ) : (
         <>
           <div className='grid grid-cols-4 gap-6'>
-            {data.results.map((auction) => (
+            {data.auctions.map((auction) => (
               <AuctionCard key={auction.id} auction={auction} />
             ))}
           </div>

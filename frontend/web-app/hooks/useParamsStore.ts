@@ -1,4 +1,3 @@
-import { init } from "next/dist/compiled/webpack/webpack"
 import { create } from "zustand"
 
 type State = {
@@ -31,7 +30,7 @@ const initialState: State = {
     winner: undefined
 }
 
-export const useParamsStore = create<State & Actions>()((set) => ({
+export const useParamsStore = create<State & Actions>((set) => ({
     ...initialState,
     setParams: (newParams: Partial<State>) => {
         set((state) => {

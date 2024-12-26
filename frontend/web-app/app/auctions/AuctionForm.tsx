@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, TextInput } from 'flowbite-react';
+import { Button } from 'flowbite-react';
 import React, { useEffect } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import Input from '../components/Input';
@@ -31,11 +31,12 @@ export default function AuctionForm({ auction }: Props) {
       reset({ make, model, color, mileage, year });
     }
     setFocus('make');
-  }, [setFocus]);
+  }, [auction, reset, setFocus]);
 
   async function onSubmit(data: FieldValues) {
     try {
       let id = '';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let res: any;
       if (pathname === '/auctions/create') {
         res = await createAuction(data);
@@ -47,12 +48,13 @@ export default function AuctionForm({ auction }: Props) {
         if (auction) {
           res = await updateAuction(data, auction.id);
           if (res !== 'OK') {
-            throw 'Can\'t update';
+            throw "Can't update";
           }
           id = auction.id;
         }
       }
       router.push('/auctions/details/' + id);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error.status + ' ' + error.message);
     }

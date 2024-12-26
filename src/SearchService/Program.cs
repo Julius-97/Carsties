@@ -1,12 +1,23 @@
+using System.Net;
 using MassTransit;
+using Polly;
+using Polly.Extensions.Http;
 using SearchService.Consumers;
 using SearchService.Data;
+using SearchService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
+static IAsyncPolicy<HttpResponseMessage> GetPolicy() => HttpPolicyExtensions
+                                                            .HandleTransientHttpError()
+                                                            .OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound)
+                                                            .WaitAndRetryForeverAsync(_ => TimeSpan.FromSeconds(3));
+
 builder.Services.AddControllers();
+builder.Services.AddHttpClient<AuctionSvcHttpClient>().AddPolicyHandler(GetPolicy());
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMassTransit(x =>
 {
@@ -28,7 +39,7 @@ builder.Services.AddMassTransit(x =>
 
             e.ConfigureConsumer<AuctionCreatedConsumer>(context);
         });
-        
+
         cfg.ConfigureEndpoints(context);
     });
 });
@@ -43,13 +54,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-try
+app.Lifetime.ApplicationStarted.Register(async () =>
 {
-    await DbInitializer.InitDb(app);
-}
-catch (Exception e)
-{
-    Console.WriteLine(e);
-}
+    try
+    {
+        await DbInitializer.InitDb(app);
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e);
+    }
+});
 
 app.Run();
