@@ -5,11 +5,6 @@ import { AiOutlineClockCircle, AiOutlineSortAscending } from 'react-icons/ai';
 import { BsFillStopCircleFill, BsStopwatchFill } from 'react-icons/bs';
 import { GiFinishLine, GiFlame } from 'react-icons/gi';
 
-type Props = {
-  pageSize: number;
-  setPageSize: (size: number) => void;
-};
-
 const pageSizeButtons = [4, 8, 12];
 
 const orderButtons = [

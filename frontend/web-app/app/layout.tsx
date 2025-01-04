@@ -23,7 +23,9 @@ export default async function RootLayout({
         <ToasterProvider />
         <Navbar />
         <main className='container mx-auto px-5 pt-10'>
-          <SignalRProvider user={user}>{children}</SignalRProvider>
+          <SignalRProvider user={user} notifyUrl={process.env.NOTIFY_URL ?? ''}>
+            {children}
+          </SignalRProvider>
         </main>
       </body>
     </html>

@@ -1,0 +1,50 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: myapp
+build:
+  artifacts:
+  - image: juliuss97/auction-svc
+    context: .
+    docker:
+      dockerfile: src/AuctionService/Dockerfile
+  - image: juliuss97/search-svc
+    context: .
+    docker:
+      dockerfile: src/SearchService/Dockerfile
+  - image: juliuss97/bid-svc
+    context: .
+    docker:
+      dockerfile: src/BiddingService/Dockerfile
+  - image: juliuss97/notify-svc
+    context: .
+    docker:
+      dockerfile: src/NotificationService/Dockerfile
+  - image: juliuss97/gateway-svc
+    context: .
+    docker:
+      dockerfile: src/GatewayService/Dockerfile
+  - image: juliuss97/identity-svc
+    context: .
+    docker:
+      dockerfile: src/IdentityService/Dockerfile
+  - image: juliuss97/web-app
+    context: .
+    docker:
+      dockerfile: frontend/web-app/Dockerfile
+manifests:
+  rawYaml:
+  - infra/K8S/auction-depl.yaml
+  - infra/K8S/config.yaml
+  - infra/K8S/local-pvc.yaml
+  - infra/K8S/mongo-depl.yaml
+  - infra/K8S/postgres-depl.yaml
+  - infra/K8S/rabbit-depl.yaml
+  - infra/K8S/search-depl.yaml
+  - infra/K8S/bid-depl.yaml
+  - infra/K8S/notify-depl.yaml
+  - infra/K8S/gateway-depl.yaml
+  - infra/K8S/identity-depl.yaml
+  - infra/K8S/webapp-depl.yaml
+  - https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0-beta.0/deploy/static/provider/cloud/deploy.yaml
+  - infra/K8S/ingress-svc.yaml

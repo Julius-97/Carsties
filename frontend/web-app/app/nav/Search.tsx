@@ -12,7 +12,7 @@ export default function Search() {
   const setSearchValue = useParamsStore((state) => state.setSearchValue);
   const searchValue = useParamsStore((state) => state.searchValue);
 
-  function onChange(e: any) {
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchValue(e.target.value);
   }
 

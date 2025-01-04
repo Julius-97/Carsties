@@ -9,6 +9,7 @@ export async function getCurrentUser() {
         if (!session) return null;
 
         return session.user;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
         return null;
     }
